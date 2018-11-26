@@ -1,5 +1,5 @@
 {
-  "name": "test_heroku_gol",
+  "name": "Programming_3",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hanumanum/test-heroku-gol.git"
+    "url": "git+https://github.com/SargRub/Game-of-Life.git"
   },
-  "author": "hanuman",
+  "author": "SargRub",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hanumanum/test-heroku-gol/issues"
