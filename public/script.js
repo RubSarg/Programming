@@ -18,37 +18,27 @@ function setup() {
     //     [1, 1, 0, 0, 0]
     // ];
 
-    frameRate(2);
+    frameRate(5);
     createCanvas(matrix[0].length * side, matrix.length * side);
-    var grass = 0;
-    var grasseater = 0;
-    var predator = 0;
-    var eater = 0;
-    var monster = 0;
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
                 matrix[y][x] = new Grass(x, y, 1);
-                grass++;
             }
             else if (matrix[y][x] == 2) {
                 matrix[y][x] = new GrassEater(x, y, 2);
-                grasseater++;
             }
             else if (matrix[y][x] == 3) 
             {
                 matrix[y][x] = new Predator(x, y, 3);
-                predator++;
             }
             else if (matrix[y][x] == 4)
             {
                 matrix[y][x] = new Glutton(x,y,4);
-                eater++;
             }
             else if (matrix[y][x] == 5)
             {
                 matrix[y][x] = new Tank(x,y,5);
-                monster++;
             }
         }
     }
