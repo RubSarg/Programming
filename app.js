@@ -1,3 +1,4 @@
+//var modules = require("modules");
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -19,12 +20,6 @@ function frameRate(frameCount)
 
 function draw()
 {
-  for (var y = 0; y < 80; y++) {
-    matrix[y] = [];
-    for (var x = 0; x < 80; x++) {
-        matrix[y][x] = random([0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,4,5]);
-    }
-  } 
   for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
         if (matrix[y][x] == 1) {
