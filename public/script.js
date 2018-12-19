@@ -1,19 +1,27 @@
 var matrix = [];
+var socket;
+
 var side = 12;
 function setup() 
 {
-    background();
-
+    background('#acacac');
     frameRate(0);
 
     socket = io();
 
-    socket.on('first matrix', function (mtx) {
+    socket.on('send matrix', function (mtx) {
         matrix = mtx;
         console.log(matrix);
-        createCanvas(matrix[0].length * side, matrix.length * side);
-        background('#acacac');
+        createCanvas(matrix[0].length * side, matrix.length * side); 
+        redraw()
+
+        socket.on("redraw", function(mtx){
+            matrix = mtx;
+            redraw()
+        })
     });
+
+    noLoop();
 }
 
 

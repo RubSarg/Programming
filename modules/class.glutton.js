@@ -63,15 +63,15 @@ module.exports = class Glutton extends LivingCreature {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
-    mul() {
-        var newCell = random(this.chooseCell(0));
+    mul(matrix) {
+        var newCell = random_item(this.chooseCell(0));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = new Glutton(newX, newY, 4);
         }
     }
-    move() {
+    move(matrix) {
         if (this.acted == false) {
             var newCell = random(this.chooseCell(0));
             if (newCell) {
@@ -90,13 +90,12 @@ module.exports = class Glutton extends LivingCreature {
 
         }
     }
-    die() {
+    die(matrix) {
         matrix[this.y][this.x] = 0;
     }
-    eat() {
-
-        var dexinner = this.chooseCell(2);
-        var karmirner = this.chooseCell(3);
+    eat(matrix) {
+        var dexinner = this.chooseCell(2, matrix);
+        var karmirner = this.chooseCell(3, matrix);
         if (dexinner.length > 0) {
             for (var i = 0; i < dexinner.length; i++) {
                 var newX = dexinner[i][0];
@@ -127,4 +126,8 @@ module.exports = class Glutton extends LivingCreature {
         
     }
 
+}
+function random_item(items) 
+{
+    return items[Math.floor(Math.random() * items.length)];
 }

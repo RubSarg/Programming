@@ -63,9 +63,9 @@ module.exports = class Tank extends LivingCreature {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
-    move() {
+    move(matrix) {
         if (this.acted == false) {
-            var newCell = random(this.chooseCell(0));
+            var newCell = random_item(this.chooseCell(0, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -78,14 +78,14 @@ module.exports = class Tank extends LivingCreature {
         }
         this.energy--;
     }
-    die() {
+    die(matrix) {
         matrix[this.y][this.x] = 0;
     }
-    kill() {
+    kill(matrix) {
         if (this.acted == false) {
-            var newCell = random(this.chooseCell(2));
-            var newCell_2 = random(this.chooseCell(3));
-            var newCell_3 = random(this.chooseCell(4));
+            var newCell = random_item(this.chooseCell(2, matrix));
+            var newCell_2 = random_item(this.chooseCell(3, matrix));
+            var newCell_3 = random_item(this.chooseCell(4, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -108,11 +108,14 @@ module.exports = class Tank extends LivingCreature {
                 this.acted = true;
             }
             else {
-                this.move();
+                this.move(matrix);
             }
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix);
             }
         }
     }
+}
+function random_item(items) {
+    return items[Math.floor(Math.random() * items.length)];
 }

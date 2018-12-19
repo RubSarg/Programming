@@ -37,19 +37,19 @@ module.exports = class Predator extends LivingCreature {
     }
     chooseCell(character) {
         this.getNewCoordinates();
-        return super.chooseCell(character);
+        return super.chooseCell(character, matrix);
     }
-    mul() {
-        var newCell = random(this.chooseCell(0));
+    mul(matrix) {
+        var newCell = random_item(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = new Predator(newX, newY, 3);
         }
     }
-    move() {
+    move(matrix) {
         if (this.acted == false) {
-            var newCell = random(this.chooseCell(0));
+            var newCell = random_item(this.chooseCell(0, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -63,9 +63,9 @@ module.exports = class Predator extends LivingCreature {
         }
         this.energy--;
     }
-    eat() {
+    eat(matrix) {
         if (this.acted == false) {
-            var newCell = random(this.chooseCell(2));
+            var newCell = random_item(this.chooseCell(2, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -88,7 +88,10 @@ module.exports = class Predator extends LivingCreature {
             }
         }
     }
-    die() {
+    die(matrix) {
         matrix[this.y][this.x] = 0;
     }
+}
+function random_item(items) {
+    return items[Math.floor(Math.random() * items.length)];
 }
