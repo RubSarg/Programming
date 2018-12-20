@@ -5,10 +5,9 @@ var Tank = require("./class.tank.js");
 var Glutton = require("./class.glutton.js");
 
 var matrix = [];
-var side = 12;
-for (var y = 0; y < 80; y++) {
+for (var y = 0; y < 50; y++) {
     matrix[y] = [];
-    for (var x = 0; x < 80; x++) {
+    for (var x = 0; x < 50; x++) {
         matrix[y][x] = random_item([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 5]);
     }
 }
@@ -31,14 +30,8 @@ for (var y = 0; y < matrix.length; y++) {
         }
     }
 }
-function random_item(items) {
+function random_item(items) 
+{
     return items[Math.floor(Math.random() * items.length)];
 }
-
-// for (var y = 0; y < 80; y++) {
-//     matrix[y] = [];
-//     for (var x = 0; x < 80; x++) {
-//         matrix[y][x] = random_item([0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,4,5]);
-//     }
-// }
 module.exports = matrix;

@@ -12,14 +12,6 @@ app.get('/', function (req, res) {
 
 server.listen(3000);
 
-var matrix = require("./modules/matrix.js");
-
-var Grass = require("./modules/class.grass.js");
-var GrassEater = require("./modules/class.grasseater.js");
-var Predator = require("./modules/class.predator.js");
-var Tank = require("./modules/class.tank.js");
-var Glutton = require("./modules/class.glutton.js");
-
 io.on('connection', function (socket) {
 	socket.emit("send matrix", matrix);
 
@@ -50,9 +42,6 @@ io.on('connection', function (socket) {
 		socket.emit("redraw", matrix);
 	}, time);
 });
-
-var matrix = require("./modules/matrix.js");
-
 var time = frameRate(5);
 
 function frameRate(frameCount)
@@ -60,7 +49,4 @@ function frameRate(frameCount)
     return 1000 / frameCount;
 }
 
-
-
-
-//setInterval(draw, time) 
+var matrix = require("./modules/matrix.js");

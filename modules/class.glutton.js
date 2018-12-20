@@ -59,12 +59,12 @@ module.exports = class Glutton extends LivingCreature {
             [this.x + 2, this.y + 2],
         ]
     }
-    chooseCell(character) {
+    chooseCell(character, matrix) {
         this.getNewCoordinates();
-        return super.chooseCell(character);
+        return super.chooseCell(character, matrix);
     }
     mul(matrix) {
-        var newCell = random_item(this.chooseCell(0));
+        var newCell = random_item(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -73,7 +73,7 @@ module.exports = class Glutton extends LivingCreature {
     }
     move(matrix) {
         if (this.acted == false) {
-            var newCell = random(this.chooseCell(0));
+            var newCell = random_item(this.chooseCell(0, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -85,45 +85,53 @@ module.exports = class Glutton extends LivingCreature {
             }
             this.energy--;
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix);
             }
-
         }
     }
     die(matrix) {
         matrix[this.y][this.x] = 0;
     }
     eat(matrix) {
-        var dexinner = this.chooseCell(2, matrix);
-        var karmirner = this.chooseCell(3, matrix);
-        if (dexinner.length > 0) {
-            for (var i = 0; i < dexinner.length; i++) {
-                var newX = dexinner[i][0];
-                var newY = dexinner[i][1];
-                matrix[newY][newX] = 0;
-                this.energy++;
+        if (this.acted == false)
+        {
+            var dexinner = this.chooseCell(2, matrix);
+            var karmirner = this.chooseCell(3, matrix);
+            if (dexinner.length > 0) {
+                for (var i = 0; i < dexinner.length; i++) {
+                    var newX = dexinner[i][0];
+                    var newY = dexinner[i][1];
+                    matrix[newY][newX] = 0;
+                    this.energy++;
+                }
+                if (this.energy >= 12) {
+                    this.mul(matrix);
+                    this.energy = 1;
+                }
+                this.acted = true;
             }
-            if (this.energy >= 12) {
-                this.mul();
-                this.energy = 1;
+            else if (karmirner > 0) {
+                for (var i = 0; i < karmirner.length; i++) {
+                    var newX = karmirner[i][0];
+                    var newY = karmirner[i][1];
+                    matrix[newY][newX] = 0;
+                    this.energy++;
+                }
+                if (this.energy >= 12) {
+                    this.mul(matrix);
+                    this.energy = 1;
+                }
+                this.acted = true;
+            }
+            else {
+                this.move(matrix);
+                this.acted = true;
             }
         }
-        else if (karmirner > 0) {
-            for (var i = 0; i < karmirner.length; i++) {
-                var newX = karmirner[i][0];
-                var newY = karmirner[i][1];
-                matrix[newY][newX] = 0;
-                this.energy++;
-            }
-            if (this.energy >= 12) {
-                this.mul();
-                this.energy = 1;
-            }
+        else
+        {
+            this.acted = false;
         }
-        else {
-            this.move();
-        }
-        
     }
 
 }

@@ -35,7 +35,7 @@ module.exports = class Predator extends LivingCreature {
             [this.x + 2, this.y + 2],
         ];
     }
-    chooseCell(character) {
+    chooseCell(character, matrix) {
         this.getNewCoordinates();
         return super.chooseCell(character, matrix);
     }
@@ -75,17 +75,21 @@ module.exports = class Predator extends LivingCreature {
                 this.y = newY;
                 this.energy++;
                 if (this.energy >= 12) {
-                    this.mul();
+                    this.mul(matrix);
                     this.energy = 1;
                 }
                 this.acted = true;
             }
             else {
-                this.move();
+                this.move(matrix);
+                this.acted = true;
             }
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix);
             }
+        }
+        else{
+            this.acted = false;
         }
     }
     die(matrix) {

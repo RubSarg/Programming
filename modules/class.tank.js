@@ -59,9 +59,9 @@ module.exports = class Tank extends LivingCreature {
             [this.x + 2, this.y + 2],
         ]
     }
-    chooseCell(character) {
+    chooseCell(character, matrix) {
         this.getNewCoordinates();
-        return super.chooseCell(character);
+        return super.chooseCell(character, matrix);
     }
     move(matrix) {
         if (this.acted == false) {
@@ -109,10 +109,14 @@ module.exports = class Tank extends LivingCreature {
             }
             else {
                 this.move(matrix);
+                this.acted = true;
             }
             if (this.energy <= 0) {
                 this.die(matrix);
             }
+        }
+        else{
+            this.acted = false;
         }
     }
 }

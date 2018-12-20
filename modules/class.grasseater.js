@@ -5,6 +5,7 @@ module.exports = class GrassEater extends LivingCreature {
         super(x, y, index);
         this.tariq = 0;
         this.energy = 8;
+        this.acted = false;
     }
    getNewCoordinates() {
        this.directions = [
@@ -18,12 +19,12 @@ module.exports = class GrassEater extends LivingCreature {
            [this.x + 1, this.y + 1]
        ];
    }
-   chooseCell(character) {
+   chooseCell(character, matrix) {
        this.getNewCoordinates();
-       return super.chooseCell(character);
+       return super.chooseCell(character, matrix);
    }
     mul(matrix) {
-        var newCell = random_item(this.chooseCell(0));
+        var newCell = random_item(this.chooseCell(0, matrix));
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -32,7 +33,7 @@ module.exports = class GrassEater extends LivingCreature {
     }
     move(matrix) {
         if (this.acted == false) {
-            var newCell = random_item(this.chooseCell(0));
+            var newCell = random_item(this.chooseCell(0, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -43,14 +44,14 @@ module.exports = class GrassEater extends LivingCreature {
             }
             this.energy--;
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix);
             }
             this.acted = true;
         }
     }
     eat(matrix) {
         if (this.acted == false) {
-            var newCell = random_item(this.chooseCell(1));
+            var newCell = random_item(this.chooseCell(1, matrix));
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
@@ -59,15 +60,19 @@ module.exports = class GrassEater extends LivingCreature {
                 this.x = newX;
                 this.y = newY;
                 this.energy++;
+                this.acted = true;
                 if (this.energy >= 7) {
-                    this.mul();
+                    this.mul(matrix);
                     this.energy = 4;
                 }
-                this.acted = true;
             }
             else {
-                this.move();
+                this.move(matrix);
+                this.acted = true;
             }
+        }
+        else{
+            this.acted = false;
         }
 
     }

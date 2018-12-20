@@ -11,13 +11,14 @@ function setup()
 
     socket.on('send matrix', function (mtx) {
         matrix = mtx;
+        background('#acacac');
         console.log(matrix);
-        createCanvas(matrix[0].length * side, matrix.length * side); 
-        redraw()
+        createCanvas(matrix[0].length * side, matrix.length *  side); 
+        redraw();
 
         socket.on("redraw", function(mtx){
             matrix = mtx;
-            redraw()
+            redraw();
         })
     });
 
@@ -40,22 +41,22 @@ function draw() {
             else if (matrix[y][x].index == 2) {
                 fill("yellow");
                 rect(x * side, y * side, side, side);
-                matrix[y][x].acted = false;
+                //matrix[y][x].acted = false;
             }
             else if (matrix[y][x].index == 3) {
                 fill("red");
                 rect(x * side, y * side, side, side);
-                matrix[y][x].acted = false;
+                //matrix[y][x].acted = false;
             }
             else if (matrix[y][x].index == 4) {
                 fill("purple");
                 rect(x * side, y * side, side, side);
-                matrix[y][x].acted = false;
+                //matrix[y][x].acted = false;
             }
             else if (matrix[y][x].index == 5) {
                 fill("blue");
                 rect(x * side, y * side, side, side);
-                matrix[y][x].acted = false;
+                //matrix[y][x].acted = false;
             }
         }
     }
