@@ -20,7 +20,13 @@ function setup()
             matrix = mtx;
             redraw();
         })
+        socket.on("stats",function(stats)
+        {
+            stat = stats;
+            console.log(stat);
+        })
     });
+
 
     noLoop();
 }

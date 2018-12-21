@@ -45,6 +45,8 @@ module.exports = class Predator extends LivingCreature {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = new Predator(newX, newY, 3);
+            Predator.born++;
+            Predator.current++;
         }
     }
     move(matrix) {
@@ -69,6 +71,7 @@ module.exports = class Predator extends LivingCreature {
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
+                matrix[newY][newX].die(matrix);
                 matrix[newY][newX] = matrix[this.y][this.x];
                 matrix[this.y][this.x] = 0;
                 this.x = newX;
@@ -94,6 +97,8 @@ module.exports = class Predator extends LivingCreature {
     }
     die(matrix) {
         matrix[this.y][this.x] = 0;
+        Predator.dead++;
+        Predator.current--;
     }
 }
 function random_item(items) {

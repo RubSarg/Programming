@@ -80,6 +80,8 @@ module.exports = class Tank extends LivingCreature {
     }
     die(matrix) {
         matrix[this.y][this.x] = 0;
+        Tank.dead++;
+        Tank.current--;
     }
     kill(matrix) {
         if (this.acted == false) {
@@ -89,23 +91,35 @@ module.exports = class Tank extends LivingCreature {
             if (newCell) {
                 var newX = newCell[0];
                 var newY = newCell[1];
-                matrix[newY][newX] = 0;
-                this.energy++;
-                this.acted = true;
+                if (matrix[newY][newX].index == 2)
+                {
+                    matrix[newY][newX].die(matrix);
+                    matrix[newY][newX] = 0;
+                    this.energy++;
+                    this.acted = true;
+                }
             }
             else if (newCell_2) {
                 var newX = newCell_2[0];
                 var newY = newCell_2[1];
-                matrix[newY][newX] = 0;
-                this.energy++;
-                this.acted = true;
+                if (matrix[newY][newX].index == 3)
+                {
+                    matrix[newY][newX].die(matrix);
+                    matrix[newY][newX] = 0;
+                    this.energy++;
+                    this.acted = true;
+                }
             }
             else if (newCell_3) {
                 var newX = newCell_3[0];
                 var newY = newCell_3[1];
-                matrix[newY][newX] = 0;
-                this.energy++;
-                this.acted = true;
+                if (matrix[newY][newX].index == 4)
+                {
+                    matrix[newY][newX].die(matrix);
+                    matrix[newY][newX] = 0;
+                    this.energy++;
+                    this.acted = true;
+                }
             }
             else {
                 this.move(matrix);

@@ -69,6 +69,8 @@ module.exports = class Glutton extends LivingCreature {
             var newX = newCell[0];
             var newY = newCell[1];
             matrix[newY][newX] = new Glutton(newX, newY, 4);
+            Glutton.born++;
+            Glutton.current++;
         }
     }
     move(matrix) {
@@ -91,6 +93,8 @@ module.exports = class Glutton extends LivingCreature {
     }
     die(matrix) {
         matrix[this.y][this.x] = 0;
+        Glutton.dead++
+        Glutton.current--;
     }
     eat(matrix) {
         if (this.acted == false)
@@ -101,8 +105,13 @@ module.exports = class Glutton extends LivingCreature {
                 for (var i = 0; i < dexinner.length; i++) {
                     var newX = dexinner[i][0];
                     var newY = dexinner[i][1];
-                    matrix[newY][newX] = 0;
-                    this.energy++;
+                    console.log(dexinner);
+                    if(matrix[newY][newX].index == 2)
+                    {
+                        matrix[newY][newX].die(matrix);
+                        matrix[newY][newX] = 0;
+                        this.energy++;
+                    }
                 }
                 if (this.energy >= 12) {
                     this.mul(matrix);
@@ -110,12 +119,16 @@ module.exports = class Glutton extends LivingCreature {
                 }
                 this.acted = true;
             }
-            else if (karmirner > 0) {
+            else if (karmirner.length > 0) {
                 for (var i = 0; i < karmirner.length; i++) {
                     var newX = karmirner[i][0];
                     var newY = karmirner[i][1];
-                    matrix[newY][newX] = 0;
-                    this.energy++;
+                    if(matrix[newY][newX].index == 3)
+                    {
+                        matrix[newY][newX].die(matrix);
+                        matrix[newY][newX] = 0;
+                        this.energy++;
+                    }
                 }
                 if (this.energy >= 12) {
                     this.mul(matrix);
