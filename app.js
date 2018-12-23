@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
    res.redirect('index.html');
 });
 
-server.listen(3001);
+server.listen(3000);
 
 io.on('connection', function (socket) {
 	socket.emit("send matrix", matrix);
@@ -148,3 +148,4 @@ var stat = {
 		"current" : 0
     }
 };
+module.exports = stat;
