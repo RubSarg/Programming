@@ -76,6 +76,10 @@ module.exports = class Tank extends LivingCreature {
                 this.acted = true;
             }
         }
+        else
+        {
+            this.acted == false;
+        }
         this.energy--;
     }
     die(matrix) {

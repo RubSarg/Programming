@@ -13,8 +13,6 @@ module.exports = class Grass extends LivingCreature{
             this.multiply = 0;
             Grass.born++;
             Grass.current++;
-
-            console.log(Grass.born)
         }
     }
 

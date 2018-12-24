@@ -1,19 +1,14 @@
-// var Grass = require("../modules/class.grass");
-// var GrassEater = require("../modules/class.grasseater");
-// var Predator = require("../modules/class.predator");
-// var Tank = require("../modules/class.tank");
-// var Glutton = require("../class.glutton.js");
-
 var matrix = [];
 var socket;
-
 var stat;
-
 var side = 13;
+var count = 0;
+var summer = true;
+var winter = false;
+
 function setup() 
 {
-    background('#acacac');
-    //frameRate(0);
+    //background('#acacac');
 
     socket = io();
 
@@ -35,7 +30,9 @@ function setup()
     }); 
     noLoop();
 }
+//frameRate(5);
 function draw() {
+    console.log("barev");
     background("#acacac");
     fill("black"); 
     textSize(32);
@@ -131,12 +128,27 @@ function draw() {
         textSize(32);
         text(str(stat.Tank.current), matrix[0].length * side + 700, 500);
     }
-
+    count += 20;
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x].index == 1) {
-                fill("green");
-                rect(x * side, y * side, side, side);
+
+            if (matrix[y][x].index == 1) 
+            {
+                if(count < 200)
+                {
+                    fill("green");
+                    rect(x * side, y * side, side, side);
+                }
+                else if (count >= 200)
+                {
+                    fill("white");
+                    rect(x * side, y * side, side, side);
+                }
+                if (count == 400)
+                {
+                    count = 0;
+                }
+                console.log(count);
             }
             else if (matrix[y][x] == 0) {
                 fill("#acacac");
@@ -145,22 +157,20 @@ function draw() {
             else if (matrix[y][x].index == 2) {
                 fill("yellow");
                 rect(x * side, y * side, side, side);
-                //matrix[y][x].acted = false;
             }
             else if (matrix[y][x].index == 3) {
                 fill("red");
                 rect(x * side, y * side, side, side);
-                //matrix[y][x].acted = false;
+                
             }
             else if (matrix[y][x].index == 4) {
                 fill("purple");
                 rect(x * side, y * side, side, side);
-                //matrix[y][x].acted = false;
+                
             }
             else if (matrix[y][x].index == 5) {
                 fill("blue");
-                rect(x * side, y * side, side, side);
-                //matrix[y][x].acted = false;
+                rect(x * side, y * side, side, side)
             }
         }
     }

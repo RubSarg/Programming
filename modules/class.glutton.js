@@ -90,6 +90,10 @@ module.exports = class Glutton extends LivingCreature {
                 this.die(matrix);
             }
         }
+        else
+        {
+            this.acted == false;
+        }
     }
     die(matrix) {
         matrix[this.y][this.x] = 0;
@@ -105,7 +109,6 @@ module.exports = class Glutton extends LivingCreature {
                 for (var i = 0; i < dexinner.length; i++) {
                     var newX = dexinner[i][0];
                     var newY = dexinner[i][1];
-                    console.log(dexinner);
                     if(matrix[newY][newX].index == 2)
                     {
                         matrix[newY][newX].die(matrix);

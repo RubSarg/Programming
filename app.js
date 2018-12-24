@@ -4,6 +4,8 @@ var Predator = require("./modules/class.predator");
 var Tank = require("./modules/class.tank");
 var Glutton = require("./modules/class.glutton");
 
+count = 0;
+
 Grass.born = 0;
 Grass.dead = 0;
 Grass.current = 0;
@@ -37,7 +39,7 @@ app.get('/', function (req, res) {
    res.redirect('index.html');
 });
 
-server.listen(3000);
+server.listen(3001);
 
 io.on('connection', function (socket) {
 	socket.emit("send matrix", matrix);
@@ -45,28 +47,24 @@ io.on('connection', function (socket) {
 	setInterval(function(){  
           for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
-                if (matrix[y][x].index == 1) {
+                if (matrix[y][x].index == 1) 
+                {
                     matrix[y][x].mul(matrix);
-                    //stat.Grass.born++;
                 }
                 else if (matrix[y][x].index == 2) {
                     matrix[y][x].eat(matrix);
-                    //stat.GrassEater.born++;
                 }
                 else if(matrix[y][x].index == 3)
                 {
                     matrix[y][x].eat(matrix);
-                    //stat.Predator.born++;
                 }
                 else if(matrix[y][x].index == 4)
                 {
                     matrix[y][x].eat(matrix);
-                    //stat.Glutton.born++;
                 }
                 else if(matrix[y][x].index == 5)
                 {
                     matrix[y][x].kill(matrix);
-                    //stat.Tank.born++;
                 }
             }
           }

@@ -63,6 +63,10 @@ module.exports = class Predator extends LivingCreature {
 
             }
         }
+        else
+        {
+            this.acted == false;
+        }
         this.energy--;
     }
     eat(matrix) {

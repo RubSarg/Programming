@@ -50,6 +50,10 @@ module.exports = class GrassEater extends LivingCreature {
             }
             this.acted = true;
         }
+        else
+        {
+            this.acted == false;
+        }
     }
     eat(matrix) {
         if (this.acted == false) {
@@ -69,12 +73,14 @@ module.exports = class GrassEater extends LivingCreature {
                     this.energy = 4;
                 }
             }
-            else {
+            else 
+            {
                 this.move(matrix);
                 this.acted = true;
             }
         }
-        else{
+        else
+        {
             this.acted = false;
         }
 
