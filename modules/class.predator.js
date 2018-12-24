@@ -69,10 +69,10 @@ module.exports = class Predator extends LivingCreature {
         }
         this.energy--;
     }
-    eat(matrix) {
+    eat(matrix, tiv) {
         if (this.acted == false) {
             var newCell = random_item(this.chooseCell(2, matrix));
-            if (newCell) {
+            if (newCell && tiv % 3 != 0) {
                 var newX = newCell[0];
                 var newY = newCell[1];
                 matrix[newY][newX].die(matrix);

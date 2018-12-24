@@ -2,13 +2,10 @@ var matrix = [];
 var socket;
 var stat;
 var side = 13;
-var count = 0;
-var summer = true;
-var winter = false;
+var count;
 
 function setup() 
 {
-    //background('#acacac');
 
     socket = io();
 
@@ -27,10 +24,14 @@ function setup()
             stat = stats;
             return stat;
         })
+        socket.on("count", function(counts)
+        {
+            count = counts;
+            return count;
+        })
     }); 
     noLoop();
 }
-//frameRate(5);
 function draw() {
     background("#acacac");
     fill("black"); 
@@ -173,5 +174,5 @@ function draw() {
         }
     }
 }
-module.exports = count;
+
     

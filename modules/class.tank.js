@@ -138,6 +138,7 @@ module.exports = class Tank extends LivingCreature {
         }
     }
 }
-function random_item(items) {
+function random_item(items) 
+{
     return items[Math.floor(Math.random() * items.length)];
 }

@@ -49,7 +49,14 @@ io.on('connection', function (socket) {
             for (var x = 0; x < matrix[y].length; x++) {
                 if (matrix[y][x].index == 1) 
                 {
-                    matrix[y][x].mul(matrix);
+                    if (count < 200)
+                    {
+                        matrix[y][x].mul(matrix);                    
+                    }
+                    if(count == 400)
+                    {
+                        count = 0;
+                    }
                 }
                 else if (matrix[y][x].index == 2) {
                     if (count < 200)
@@ -67,11 +74,32 @@ io.on('connection', function (socket) {
                 }
                 else if(matrix[y][x].index == 3)
                 {
-                    matrix[y][x].eat(matrix);
+                    if(count < 200)
+                    {    
+                        matrix[y][x].eat(matrix, 3 * count + 1);
+                    }
+                    else if(count >= 200)
+                    {
+                        matrix[y][x].eat(matrix, count);
+                        if(count == 400)
+                        {
+                            count = 0;
+                        }
+                    }
                 }
                 else if(matrix[y][x].index == 4)
                 {
-                    matrix[y][x].eat(matrix);
+                    if(count < 200)
+                    {
+                        matrix[y][x].eat(matrix);
+                    }
+                    else if(count >= 200)
+                    {
+                        if(count % 2 == 0)
+                        { 
+                            matrix[y][x].eat(matrix);
+                        }
+                    }
                 }
                 else if(matrix[y][x].index == 5)
                 {
@@ -80,7 +108,8 @@ io.on('connection', function (socket) {
             }
           }
         socket.emit("redraw", matrix);
-        count+=20;
+        socket.emit("count", count);
+        count += 20;
     }, time);
     
     
