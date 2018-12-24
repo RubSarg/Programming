@@ -32,7 +32,6 @@ function setup()
 }
 //frameRate(5);
 function draw() {
-    console.log("barev");
     background("#acacac");
     fill("black"); 
     textSize(32);
@@ -148,7 +147,6 @@ function draw() {
                 {
                     count = 0;
                 }
-                console.log(count);
             }
             else if (matrix[y][x] == 0) {
                 fill("#acacac");
@@ -175,4 +173,5 @@ function draw() {
         }
     }
 }
+module.exports = count;
     
