@@ -116,7 +116,7 @@ io.on('connection', function (socket) {
                         matrix[y][x].kill(matrix, 4);
                         if(count == 2000)
                         {
-                            
+                            count = 0;
                         }
                     }
                 }
