@@ -128,23 +128,22 @@ function draw() {
         textSize(32);
         text(str(stat.Tank.current), matrix[0].length * side + 700, 500);
     }
-    count += 20;
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
             if (matrix[y][x].index == 1) 
             {
-                if(count < 200)
+                if(count < 1000)
                 {
                     fill("green");
                     rect(x * side, y * side, side, side);
                 }
-                else if (count >= 200)
+                else if (count >= 1000)
                 {
                     fill("white");
                     rect(x * side, y * side, side, side);
                 }
-                if (count == 400)
+                if (count == 2000)
                 {
                     count = 0;
                 }
@@ -173,6 +172,7 @@ function draw() {
             }
         }
     }
+    count+=50;
 }
 
     

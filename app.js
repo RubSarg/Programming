@@ -49,24 +49,24 @@ io.on('connection', function (socket) {
             for (var x = 0; x < matrix[y].length; x++) {
                 if (matrix[y][x].index == 1) 
                 {
-                    if (count < 200)
+                    if (count < 1000)
                     {
                         matrix[y][x].mul(matrix);                    
                     }
-                    if(count == 400)
+                    if(count == 2000)
                     {
                         count = 0;
                     }
                 }
                 else if (matrix[y][x].index == 2) {
-                    if (count < 200)
+                    if (count < 1000)
                     {
                         matrix[y][x].eat(matrix, 5);
                     }
-                    else if (count >= 200)
+                    else if (count >= 1000)
                     {
                         matrix[y][x].eat(matrix, 10);
-                        if(count == 400)
+                        if(count == 2000)
                         {
                             count = 0;
                         }
@@ -74,14 +74,14 @@ io.on('connection', function (socket) {
                 }
                 else if(matrix[y][x].index == 3)
                 {
-                    if(count < 200)
+                    if(count < 1000)
                     {    
                         matrix[y][x].eat(matrix, 3 * count + 1);
                     }
-                    else if(count >= 200)
+                    else if(count >= 1000)
                     {
                         matrix[y][x].eat(matrix, count);
-                        if(count == 400)
+                        if(count == 2000)
                         {
                             count = 0;
                         }
@@ -89,27 +89,42 @@ io.on('connection', function (socket) {
                 }
                 else if(matrix[y][x].index == 4)
                 {
-                    if(count < 200)
+                    if(count < 1000)
                     {
                         matrix[y][x].eat(matrix);
                     }
-                    else if(count >= 200)
+                    else if(count >= 1000)
                     {
                         if(count % 2 == 0)
                         { 
                             matrix[y][x].eat(matrix);
                         }
+                        if(count == 2000)
+                        {
+                            count = 0;
+                        }
                     }
                 }
                 else if(matrix[y][x].index == 5)
                 {
-                    matrix[y][x].kill(matrix);
+                    if(count < 1000)
+                    {
+                        matrix[y][x].kill(matrix, 0);
+                    }
+                    else if(count >= 1000)
+                    {
+                        matrix[y][x].kill(matrix, 4);
+                        if(count == 2000)
+                        {
+                            
+                        }
+                    }
                 }
             }
           }
         socket.emit("redraw", matrix);
         socket.emit("count", count);
-        count += 20;
+        count += 50;
     }, time);
     
     

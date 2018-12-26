@@ -3,7 +3,7 @@ var LivingCreature = require("./class.LivingCreature");
 module.exports = class Tank extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
-        this.energy = 6;
+        this.energy = 10;
         this.directions = [];
         this.acted = false;
     }
@@ -87,7 +87,7 @@ module.exports = class Tank extends LivingCreature {
         Tank.dead++;
         Tank.current--;
     }
-    kill(matrix) {
+    kill(matrix, death_count) {
         if (this.acted == false) {
             var newCell = random_item(this.chooseCell(2, matrix));
             var newCell_2 = random_item(this.chooseCell(3, matrix));
@@ -129,7 +129,7 @@ module.exports = class Tank extends LivingCreature {
                 this.move(matrix);
                 this.acted = true;
             }
-            if (this.energy <= 0) {
+            if (this.energy <= death_count) {
                 this.die(matrix);
             }
         }
